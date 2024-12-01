@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.11.35327.3
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TripWebAPI", "TripWebAPI\TripWebAPI.csproj", "{1DA8D305-B3D2-4BFC-9E50-A03036AAE151}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TripWebAPI", "TripWebAPI\TripWebAPI.csproj", "{1DA8D305-B3D2-4BFC-9E50-A03036AAE151}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TripWebUtils", "TripWebUtils\TripWebUtils.csproj", "{6AC3EA96-7DF2-43FE-A379-83F8C75CD478}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TripWebUtils", "TripWebUtils\TripWebUtils.csproj", "{6AC3EA96-7DF2-43FE-A379-83F8C75CD478}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TripWebService", "TripWebService\TripWebService.csproj", "{C3765B10-8FA8-483B-92AD-28E10669D58D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TripWebService", "TripWebService\TripWebService.csproj", "{C3765B10-8FA8-483B-92AD-28E10669D58D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TripWebData", "TripWebModels\TripWebData.csproj", "{67059DCC-6806-4804-B9EB-A1F878594763}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TripWebData", "TripWebModels\TripWebData.csproj", "{67059DCC-6806-4804-B9EB-A1F878594763}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -27,10 +27,9 @@ namespace TripWebService.TravelBusiness.Impl
         /// <returns></returns>
         public Results<List<CategoryDto>> Getlist()
         {
-            Console.WriteLine(_context.Database);
             var list = CacheManager.GetOrSet(RedisKey.AllCategoryList, () =>
             {
-                var tabCategories = _context.TabCategories.Include("UpdatedUser").Where(p => !p.Deleted);
+                var tabCategories = _context.TabCategories.Where(p => !p.Deleted);
                 return _mapper.Map<List<CategoryDto>>(tabCategories);
             },TimeSpan.FromDays(10));
 

@@ -44,7 +44,7 @@ namespace TripWebAPI.Controllers
 
             if (loginResult.Success)
             {
-                loginResult.Token = _tokenService.GenerateToken(loginResult.Data    );
+                loginResult.Token = _tokenService.GenerateToken(loginResult.Data);
             }
 
             return loginResult;
