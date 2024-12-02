@@ -98,4 +98,9 @@ public static class EmailUtil
                 return ex.Message;
             }
         }
+
+    public static void NetSendEmail(string v)
+    {
+        throw new NotImplementedException();
+    }
 }

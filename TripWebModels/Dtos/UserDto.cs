@@ -34,7 +34,7 @@ namespace TripWebData.Dtos
         /// <summary>
         /// 真实姓名
         /// </summary>
-        public string Nickname { get; set; } = null!;
+        public string? Nickname { get; set; }
         /// <summary>
         /// 生日
         /// </summary>
@@ -42,15 +42,15 @@ namespace TripWebData.Dtos
         /// <summary>
         /// 1-男，2-女,3-未知
         /// </summary>
-        public short Sex { get; set; }
+        public short? Sex { get; set; }
         /// <summary>
         /// 手机号
         /// </summary>
-        public string? Mobile { get; set; }
+        public string Mobile { get; set; } = null!;
         /// <summary>
         /// 邮箱
         /// </summary>
-        public string? Email { get; set; }
+        public string Email { get; set; } = null!;
         /// <summary>
         /// 最后修改时间
         /// </summary>

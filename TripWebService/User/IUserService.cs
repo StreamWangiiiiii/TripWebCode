@@ -21,5 +21,14 @@ namespace TripWebService.User
         /// <param name="input"></param>
         /// <returns></returns>
         Results<UserDto> Login(LoginInput input);
+
+        /// <summary>
+        /// 注册：用户名、密码、确认密码、手机、邮箱
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        Task<Results<UserDto>> RegisterAsync(RegisterInput input);
     }
+
+
 }

@@ -46,12 +46,12 @@ public partial class TabUser : BaseEntity
     /// <summary>
     /// 手机号
     /// </summary>
-    public string? Mobile { get; set; }
+    public string? Mobile { get; set; } = null!;
 
     /// <summary>
     /// 邮箱
     /// </summary>
-    public string? Email { get; set; }
+    public string Email { get; set; } = null!;
 
     /// <summary>
     /// 激活状态，1-已激活，0-未激活

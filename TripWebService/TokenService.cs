@@ -37,7 +37,6 @@ namespace TripWebService
             // 保存用户个人信息（不要放用户非常私密的信息）
             var claims = new[]
             {
-                new Claim("NickName", dto.Nickname),
                 new Claim("UserName",dto.Username),
                 new Claim("RoleName",dto.RoleName),
                 new Claim("RoleId",dto.RoleId.ToString()),
