@@ -22,4 +22,8 @@ public partial class TabRoleAuthority : BaseEntity
     /// 角色ID
     /// </summary>
     public long? RoleId { get; set; }
+    
+    public TabMenuModule MenuModule { get; set; }
+
+    public TabMenuButton MenuButton { get; set; }
 }

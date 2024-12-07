@@ -1,7 +1,7 @@
 ﻿using System.Text;
 using System.Text.RegularExpressions;
 
-namespace Utils.Utils;
+namespace TripWebUtils.Utils;
 
 /// <summary>
 /// 正则格式工具类

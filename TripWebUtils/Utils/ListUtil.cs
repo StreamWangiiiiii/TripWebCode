@@ -1,4 +1,4 @@
-﻿namespace Utils.Utils;
+﻿namespace TripWebUtils.Utils;
 
 /// <summary>
 /// 集合工具类

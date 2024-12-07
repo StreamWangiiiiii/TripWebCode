@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using TripWebData.Dtos.TravelBusiness;
 using TripWebData;
-using Consul;
 using TripWebService.TravelBusiness;
 using Microsoft.AspNetCore.Authorization;
 

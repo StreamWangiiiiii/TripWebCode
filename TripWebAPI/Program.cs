@@ -5,9 +5,6 @@ using Serilog.Events;
 using Autofac.Extensions.DependencyInjection;
 using Autofac;
 using TripWebAPI;
-using Microsoft.OpenApi.Models;
-using System.Reflection;
-using IGeekFan.AspNetCore.Knife4jUI;
 using TripWebAPI.Filters;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
@@ -16,12 +13,12 @@ using TripWebData.Options;
 using TripWebAPI.Hubs;
 using DotNetCore.CAP;
 using System.Text.Json.Serialization;
-using TripWebAPI.Models;
+using TripWebData.Consts;
 using TripWebService;
+using TripWebUtils.Utils;
 
 var builder = WebApplication.CreateBuilder(args);
 
-//×¢ÈëĞòÁĞ»¯·şÎñ
 builder.Services.AddControllers(p =>
 {
     p.Filters.Add<TokenActionFilter>();
@@ -29,10 +26,8 @@ builder.Services.AddControllers(p =>
 }).AddJsonOptions(
 options =>
 {
-    // ºöÂÔÑ­»·ĞòÁĞ»¯
     options.JsonSerializerOptions.ReferenceHandler =
     ReferenceHandler.IgnoreCycles;
-    // Ê±¼ä×ª»»
     options.JsonSerializerOptions.Converters.Add(new DateConverter());
 }
 );
@@ -40,75 +35,67 @@ options =>
 builder.Services.AddDbContextPool<TripWebContext>(p =>
 {
     p.UseMySql(builder.Configuration.GetConnectionString("mysql"), new MySqlServerVersion("9.0.1"));
-    p.LogTo(Console.WriteLine, LogLevel.Information); // ÔÚ¿ØÖÆÌ¨´òÓ¡SQL
-    p.EnableSensitiveDataLogging(true); // ´ò³öSQLÖĞµÄ²ÎÊıÖµ
+    p.LogTo(Console.WriteLine, LogLevel.Information);
+    p.EnableSensitiveDataLogging(true); 
 }, 150);
 
-builder.Host.UseSerilog((context, config) =>
-    config
-        .WriteTo.Console() // ÊäÈëµ½¿ØÖÆÌ¨
-        // Í¬Ê±Êä³öµ½ÎÄ¼şÖĞ£¬²¢ÇÒ°´ÌìÊä³ö(Ã¿Ìì¶¼»á´´½¨Ò»¸öĞÂµÄÎÄ¼ş)
-        .WriteTo.File($"{AppContext.BaseDirectory}/logs/renwoxing.log",
+builder.Host.UseSerilog((context, config) => config
+        .WriteTo.Console() 
+        .WriteTo.File($"{AppContext.BaseDirectory}/logs/TripWeb.log",
             rollingInterval: RollingInterval.Day
-            // fff£ººÁÃë zzz:Ê±Çø
             ,outputTemplate:"{Timestamp:HH:mm:ss fff zzz} " +
-                            "|| {Level} " + // Level:ÈÕÖ¾¼¶±ğ
-                            "|| {SourceContext:1} " + //SourceContext£ºÈÕÖ¾ÉÏÏÂÎÄ
-                            "|| {Message} " + // Message£ºÈÕÖ¾ÄÚÈİ
-                            "|| {Exception} " + // Exception£ºÒì³£ĞÅÏ¢
-                            "||end {NewLine}" //end:½áÊø±êÖ¾ NewLine£º»»ĞĞ
+                            "|| {Level} " + 
+                            "|| {SourceContext:1} " + 
+                            "|| {Message} " + 
+                            "|| {Exception} " + 
+                            "||end {NewLine}" 
                 )
-                .MinimumLevel.Information() // ÉèÖÃ×îĞ¡¼¶±ğ
-                .MinimumLevel.Override("Default", LogEventLevel.Information) // Ä¬ÈÏÉèÖÃ
-                .MinimumLevel.Override("Microsoft", LogEventLevel.Error) // Ö»Êä³öÎ¢ÈíµÄ´íÎóÈÕÖ¾
-                // ÉúÃüÖÜÆÚÈÕÖ¾
+                .MinimumLevel.Information() 
+                .MinimumLevel.Override("Default", LogEventLevel.Information) 
+                .MinimumLevel.Override("Microsoft", LogEventLevel.Error)
                 .MinimumLevel.Override("Default.Hosting.Lifetime",LogEventLevel.Information)
-                .Enrich.FromLogContext() // ½«ÈÕÖ¾ÉÏÏÂÎÄÒ²¼ÇÂ¼µ½ÈÕÖ¾ÖĞ
+                .Enrich.FromLogContext() 
 );
 
-// ½«ServiceProvider ¸ü»»ÎªAutofac
+//æ³¨å…¥AutoFacæœåŠ¡
 builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory())
 .ConfigureContainer<ContainerBuilder>(containerBuilder =>
 {
-    // ×¢²á¸Õ¸Õ×Ô¶¨ÒåµÄModuleÀà
     containerBuilder.RegisterModule<AutofacModuleRegister>();
-    // Èç¹ûÓĞ¶à¸öModule£¬»¹¿ÉÒÔ¼ÌĞøÌí¼Ó
 });
 
-// ÅúÁ¿×¢²áAutofacÅäÖÃÎÄ¼ş
+//æ³¨å…¥AutomapæœåŠ¡
 builder.Services.AddAutoMapper(p =>
 {
     p.AddMaps("TripWebData");
 });
 
+//ä½¿ç”¨JWTè®¤è¯
 var jwtOption = builder.Configuration.GetSection("JwtTokenOption");
 builder.Services.Configure<JwtTokenOption>(jwtOption);
 JwtTokenOption jwtTokenOption = jwtOption.Get<JwtTokenOption>();
 
-//´´½¨ÃÜÔ¿
 var rsa = RSA.Create();
 rsa.ImportRSAPrivateKey(Convert.FromBase64String(jwtTokenOption.SecurityKey), out _);
 SecurityKey securityKey = new RsaSecurityKey(rsa);
 
-// Ìí¼ÓÈÏÖ¤·şÎñ
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 .AddJwtBearer(p =>
 {
-    // Ğ£ÑéJWTÊÇ·ñºÏ·¨
     p.TokenValidationParameters = new TokenValidationParameters()
     {
         ValidAlgorithms = new string[] { "RS256" },
-        ValidateIssuer = true,//ÊÇ·ñÑéÖ¤Issuer
-        ValidateAudience = true,//ÊÇ·ñÑéÖ¤Audience
-        ValidateLifetime = true,//ÊÇ·ñÑéÖ¤Ê§Ğ§Ê±¼ä
-        ClockSkew = TimeSpan.Zero,//Ê±ÖÓÂö³åÏàÎ»²î
-        ValidateIssuerSigningKey = true,//ÊÇ·ñÑéÖ¤SecurityKey
-        ValidAudience = jwtTokenOption.Audience,//Audience
-        ValidIssuer = jwtTokenOption.Issuer,//Issuer£¬ÕâÁ½ÏîºÍÇ°ÃæÇ©·¢jwtµÄÉèÖÃÒ»ÖÂ
-        IssuerSigningKey = securityKey,//ÄÃµ½SecurityKey
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        ValidateLifetime = true,
+        ClockSkew = TimeSpan.Zero,
+        ValidateIssuerSigningKey = true,
+        ValidAudience = jwtTokenOption.Audience,
+        ValidIssuer = jwtTokenOption.Issuer,
+        IssuerSigningKey = securityKey,
     };
-
-    // SignalRÍ¨Ñ¶ÖĞµÄTokenÈÏÖ¤
+    
+    //åœ¨signalRä¸­å¢åŠ è®¤è¯
     p.Events = new JwtBearerEvents()
     {
         OnMessageReceived = context =>
@@ -125,25 +112,24 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     };
 });
 
-// ÉèÖÃÈıÖÖÊÚÈ¨²ßÂÔ
+// æ–°å¢æˆæƒç­–ç•¥
 builder.Services.AddAuthorization(p =>
 {
-    // ¹ÜÀíÔ±²ßÂÔ
     p.AddPolicy(AuthorizeRoleName.Administrator, policy =>
     {
         policy.RequireClaim("RoleName", AuthorizeRoleName.Administrator);
     });
-    // ÉÌ¼Ò²ßÂÔ
+
     p.AddPolicy(AuthorizeRoleName.SellerAdministrator, policy =>
     {
         policy.RequireClaim("RoleName", AuthorizeRoleName.SellerAdministrator);
     });
-    // ÆÕÍ¨ÓÃ»§²ßÂÔ
+
     p.AddPolicy(AuthorizeRoleName.TravelUser, policy =>
     {
         policy.RequireClaim("RoleName", AuthorizeRoleName.TravelUser);
     });
-    // ¹ÜÀíÔ±»òÕßÉÌ¼Ò¶¼¿É²Ù×÷
+
     p.AddPolicy(AuthorizeRoleName.AdminOrSeller, policy =>
     {
         policy.RequireClaim("RoleName",
@@ -151,22 +137,22 @@ builder.Services.AddAuthorization(p =>
     });
 });
 
-// ÅäÖÃÔÊĞí¿çÓò
+// è·¨åŸŸè®¾ç½®
 builder.Services.AddCors(p =>
 {
     p.AddPolicy("Travel.Client", policy =>
     {
-        policy.AllowAnyHeader();//ÔÊĞíËùÓĞ¿Í»§¶Ë
+        policy.AllowAnyHeader();
         policy.SetIsOriginAllowed(p => true);
         policy.AllowAnyMethod();
-        policy.AllowCredentials(); // Ö÷ÒªÊÇÎªÁËÔÊĞísignalR¿çÓòÍ¨Ñ¶
+        policy.AllowCredentials();
     });
 });
 
-// ÅäÖÃ¼´Ê±Í¨Ñ¶
+// æ³¨å…¥SignalRæœåŠ¡
 builder.Services.AddSignalR();
 
-// ÅäÖÃÊÂ¼ş×ÜÏßÒÔ¼°·Ö²¼Ê½ÊÂÎñ
+// æ³¨å…¥RabbitMQæœåŠ¡
 var rabbitConfig = builder.Configuration.GetSection("RabbitMQ");
 builder.Services.Configure<RabbitMQOptions>(rabbitConfig);
 var rabbitOptions = rabbitConfig.Get<RabbitMQOptions>();
@@ -183,8 +169,7 @@ builder.Services.AddCap(p =>
         mq.Password = rabbitOptions.Password;
         mq.Port = rabbitOptions.Port;
     });
-    p.UseDashboard(); // ×¢²áÒÇ±íÅÌ
-    // ÒÇ±íÅÌÄ¬ÈÏµÄ·ÃÎÊµØÖ·ÊÇ£ºhttp://localhost:xxx/cap£¬Äã¿ÉÒÔÔÚd.MatchPathÅäÖÃÏîÖĞĞŞ¸ÄcapÂ·¾¶ºó×ºÎªÆäËûµÄÃû×Ö¡£
+    p.UseDashboard(); 
 });
 
 builder.Services.AddSingleton<TokenService>();
@@ -193,10 +178,11 @@ builder.Services.AddControllers();
 builder.Services.AddHttpContextAccessor();
 
 var app = builder.Build();
+LocalServiceProvider.Instance = app.Services;
 
 app.UseHttpsRedirection();
 
-app.UseStaticFiles();//¾²Ì¬ÎÄ¼şÖĞ¼ä¼ş
+app.UseStaticFiles();
 
 app.UseCors("Travel.Client");
 app.UseAuthentication();
@@ -204,6 +190,6 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-app.MapHub<TripWebHub>("/TripWebHub"); // Ó³ÉäsignalRÍ¨Ñ¶ÖĞĞÄ
+app.MapHub<TripWebHub>("/TripWebHub"); 
 
 app.Run();

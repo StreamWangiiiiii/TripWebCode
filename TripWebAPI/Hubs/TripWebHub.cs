@@ -1,16 +1,61 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using DotNetCore.CAP;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.SignalR;
 using StackExchange.Redis;
-using Utils.Utils.RedisUtil;
+using TripWebAPI.Filters;
+using TripWebData;
+using TripWebData.Consts;
+using TripWebData.Inputs;
+using TripWebUtils.Utils.RedisUtil;
 
 namespace TripWebAPI.Hubs
 {
     /// <summary>
     /// 通讯中心
     /// </summary>
-    [Authorize]
+    [TripWebAuthorize]
     public class TripWebHub:Hub
     {
+        private readonly ICapPublisher _capPublisher;
+
+        public TripWebHub(ICapPublisher capPublisher)
+        {
+            _capPublisher = capPublisher;
+        }
+        
+        /// <summary>
+        /// 下订单
+        /// </summary>
+        /// <param name="input"></param>
+        public async Task OrderAdd(OrderAddInput input)
+        {
+            input.ConnectionId = Context.ConnectionId;
+            input.LoginUserId = Convert.ToInt64(Context.User!.Claims.FirstOrDefault(
+                p => p.Type.Equals("UserId"))!.Value);
+            await _capPublisher.PublishAsync(EventBus.OrderAdd,input);
+            await Clients.Client(Context.ConnectionId).SendAsync(SignalMethod.ReceiveMessage,
+                Results<string>.GetResult(msg:"队列提交成功，请等待处理结果"));
+        }
+        
+        /// <summary>
+        /// 批量导入用户
+        /// </summary>
+        /// <param name="filePath">excel 服务端的路径(如：/upload/20230316.xlsx)</param>
+        public async Task ImportUser(string filePath)
+        {
+            ImportUserInput input = new()
+            {
+                ConnectionId = Context.ConnectionId,
+                FilePath = filePath,
+                LoginUserId = Convert.ToInt64(Context.User!.Claims.FirstOrDefault(
+                    p => p.Type.Equals("UserId"))!.Value)
+            };
+
+            await _capPublisher.PublishAsync(EventBus.ImportUser, input);
+            await Clients.Client(Context.ConnectionId).SendAsync(SignalMethod.ReceiveMessage,
+                Results<string>.GetResult(msg:"队列提交成功，请等待处理结果"));
+        }
+        
         /// <summary>
         /// （前端调用）发送消息
         /// </summary>

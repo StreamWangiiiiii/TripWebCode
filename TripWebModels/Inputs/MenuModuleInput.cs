@@ -1,6 +1,7 @@
 ﻿using System.Text.Json.Serialization;
+using TripWebData.Inputs;
 
-namespace Travel.Data.Inputs;
+namespace TripWebData.Inputs;
 
 /// <summary>
 /// 菜单模块 - 输入参数

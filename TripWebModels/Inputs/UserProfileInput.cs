@@ -1,7 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.Text.Json.Serialization;
 
-namespace Travel.Data.Inputs;
+namespace TripWebData.Inputs;
 
 /// <summary>
 /// 更新(完善)个人档案（信息）
@@ -9,7 +8,7 @@ namespace Travel.Data.Inputs;
 public class UserProfileInput
 {
     /// <summary>
-    /// 用户名(前端不可被修改)
+    /// 用户名
     /// </summary>
     [Required] public string Username { get; set; } = null!;
     /// <summary>

@@ -10,7 +10,7 @@
     <PackageReference Include="DotNetCore.CAP.Dashboard" Version="8.3.1" />
     <PackageReference Include="DotNetCore.CAP.MySql" Version="8.3.1" />
     <PackageReference Include="DotNetCore.CAP.RabbitMQ" Version="8.3.1" />
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.10" />
     <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="8.2.1" />
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.2.1" />
   </ItemGroup>
@@ -18,6 +18,10 @@
   <ItemGroup>
     <ProjectReference Include="..\TripWebModels\TripWebData.csproj" />
     <ProjectReference Include="..\TripWebUtils\TripWebUtils.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Travel.Service.csproj" />
   </ItemGroup>
 
 </Project>

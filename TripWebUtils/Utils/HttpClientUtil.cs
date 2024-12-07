@@ -2,7 +2,7 @@
 using System.Text;
 using Newtonsoft.Json;
 
-namespace Utils.Utils;
+namespace TripWebUtils.Utils;
 
 /// <summary>
 /// Http 请求接口工具类

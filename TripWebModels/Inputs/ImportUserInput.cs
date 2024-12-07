@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Travel.Data.Inputs;
+namespace TripWebData.Inputs;
 
 /// <summary>
 /// 用户批量导入输入参数

@@ -1,7 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.Text.Json.Serialization;
 
-namespace Travel.Data.Inputs;
+namespace TripWebData.Inputs;
 
 /// <summary>
 /// 根据景点ID，查询旅客的输入参数

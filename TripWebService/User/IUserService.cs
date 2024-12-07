@@ -28,6 +28,15 @@ namespace TripWebService.User
         /// <param name="input"></param>
         /// <returns></returns>
         Task<Results<UserDto>> RegisterAsync(RegisterInput input);
+
+        /// <summary>
+        /// 修改用户资料
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        //Task<Results<int>> UpdateUserProfileAsync(UserProfileInput input);
+
+        //Results<T> CheckUserInput<T>(T input);
     }
 
 

@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Authorization;
 using TripWebData.Inputs;
 using TripWebData.Dtos;
 using TripWebService;
-using Utils.Utils;
+using TripWebUtils.Utils;
 
 namespace TripWebAPI.Controllers
 {
@@ -69,15 +69,6 @@ namespace TripWebAPI.Controllers
                     string.IsNullOrWhiteSpace(input.EmailCode.ToString()))
             {
                 return Results<UserDto>.InValidParameter();
-            }
-
-            //校验手机和邮箱格式
-            if (!FormatUtil.IsEmail(input.Email)) {
-                return Results<UserDto>.FailResult("邮箱格式错误");
-            }
-            if (!FormatUtil.IsPhone(input.Mobile))
-            {
-                return Results<UserDto>.FailResult("手机号格式错误");
             }
 
             //判断两次输入是否一致

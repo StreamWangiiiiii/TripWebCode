@@ -1,4 +1,4 @@
-﻿namespace Utils.Utils.RedisUtil;
+﻿namespace TripWebUtils.Utils.RedisUtil;
 
 /// <summary>
 /// 所有开发人员redis使用的Key前缀

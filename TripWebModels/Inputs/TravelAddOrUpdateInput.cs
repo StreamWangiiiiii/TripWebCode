@@ -1,6 +1,4 @@
-﻿using System.Text.Json.Serialization;
-
-namespace Travel.Data.Inputs;
+﻿namespace TripWebData.Inputs;
 
 /// <summary>
 /// 旅游景点添加或者修改-输入参数

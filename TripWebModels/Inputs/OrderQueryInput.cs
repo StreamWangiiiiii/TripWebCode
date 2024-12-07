@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace Travel.Data.Inputs;
+namespace TripWebData.Inputs;
 
 /// <summary>
 /// 订单查询输入参数

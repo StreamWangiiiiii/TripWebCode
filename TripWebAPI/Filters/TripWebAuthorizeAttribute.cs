@@ -10,9 +10,9 @@ namespace TripWebAPI.Filters
     /// 授权过滤器
     /// </summary>
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, AllowMultiple = true, Inherited = true)]
-    public class AuthorizeAttribute : Attribute, IAuthorizationFilter, IAuthorizeData
+    public class TripWebAuthorizeAttribute : Attribute, IAuthorizationFilter, IAuthorizeData
     {
-        public AuthorizeAttribute() { }
+        public TripWebAuthorizeAttribute() { }
         /// <summary>
         /// 策略名称
         /// </summary>
@@ -25,7 +25,7 @@ namespace TripWebAPI.Filters
         /// 以逗号分隔的方案列表，从中构造用户信息
         /// </summary>
         public string? AuthenticationSchemes { get; set; }
-        public AuthorizeAttribute(string policy) => this.Policy = policy;
+        public TripWebAuthorizeAttribute(string policy) => this.Policy = policy;
 
         /// <summary>
         /// 授权时执行此方法

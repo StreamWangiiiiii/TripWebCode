@@ -1,5 +1,5 @@
-﻿using Utils.Utils.RedisUtil;
-using Utils.Utils.Snowflake;
+﻿using TripWebUtils.Utils.RedisUtil;
+using TripWebUtils.Utils.Snowflake;
 using TripWebData.Dtos.TravelBusiness;
 using TripWebData;
 using AutoMapper;
@@ -8,19 +8,8 @@ using TripWebData.Consts;
 
 namespace TripWebService.TravelBusiness.Impl
 {
-    public class CategoryService : ICategoryService
+    public class CategoryService : BaseService,ICategoryService
     {
-        private readonly TripWebContext _context;
-        private readonly IMapper _mapper;
-        private readonly IdWorker _idWorker;
-
-        public CategoryService(TripWebContext context, IMapper mapper)
-        {
-            _context = context;
-            _mapper = mapper;
-            _idWorker = SnowflakeUtil.CreateIdWorker();
-        }
-
         /// <summary>
         /// 查询所有分类
         /// </summary>
@@ -29,8 +18,8 @@ namespace TripWebService.TravelBusiness.Impl
         {
             var list = CacheManager.GetOrSet(RedisKey.AllCategoryList, () =>
             {
-                var tabCategories = _context.TabCategories.Where(p => !p.Deleted);
-                return _mapper.Map<List<CategoryDto>>(tabCategories);
+                var tabCategories = TripWebContext.TabCategories.Where(p => !p.Deleted);
+                return ObjectMapper.Map<List<CategoryDto>>(tabCategories);
             },TimeSpan.FromDays(10));
 
             return Results<List<CategoryDto>>.DataResult(list);
@@ -38,11 +27,11 @@ namespace TripWebService.TravelBusiness.Impl
 
         public Results<CategoryDto> GetCategory(long id)
         {
-            var entity = _context.TabCategories.AsNoTracking().FirstOrDefault(p => p.Id == id);
+            var entity = TripWebContext.TabCategories.AsNoTracking().FirstOrDefault(p => p.Id == id);
             if (entity == null){
                 return Results<CategoryDto>.FailResult("未找到记录");
             }
-            return Results<CategoryDto>.DataResult(_mapper.Map<CategoryDto>(entity));
+            return Results<CategoryDto>.DataResult(ObjectMapper.Map<CategoryDto>(entity));
         }
     }
 }

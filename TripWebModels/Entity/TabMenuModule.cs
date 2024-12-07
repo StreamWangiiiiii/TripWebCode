@@ -28,4 +28,6 @@ public partial class TabMenuModule : BaseEntity
     /// 上级模块ID
     /// </summary>
     public long? ParentMenuModuleId { get; set; }
+    
+    public TabMenuModule ParentMenuModule { get; set; }
 }

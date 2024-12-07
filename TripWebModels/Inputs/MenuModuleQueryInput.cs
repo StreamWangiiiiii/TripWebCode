@@ -1,9 +1,9 @@
-﻿namespace Travel.Data.Inputs;
+﻿namespace TripWebData.Inputs;
 
 /// <summary>
 /// 菜单模板查询 - 输入参数
 /// </summary>
-public class MenuModuleQueryInput:PageInput
+public class MenuModuleQueryInput : PageInput
 {
     /// <summary>
     /// 父菜单ID

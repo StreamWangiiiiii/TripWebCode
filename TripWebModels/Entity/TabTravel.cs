@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using TripWebData.Enums;
 
 namespace TripWebData.Entity;
 
@@ -81,7 +84,7 @@ public partial class TabTravel : BaseEntity
     /// <summary>
     /// 审核状态：1-通过，0-驳回，2-待审核
     /// </summary>
-    public bool? AuditStatus { get; set; }
+    public AuditStatusEnum? AuditStatus { get; set; }
 
     /// <summary>
     /// 出发时间
@@ -97,9 +100,18 @@ public partial class TabTravel : BaseEntity
     /// 人数上限
     /// </summary>
     public int? PersonLimit { get; set; }
+    
+    /// <summary>
+    /// 已下单的人数
+    /// </summary>
+    [Column("have_ordered")]
+    public int HaveOrdered { get; set; }
 
     /// <summary>
     /// 乐观锁
     /// </summary>
     public DateTime? Version { get; set; }
+
+    public  TabCategory Category { get; set; }
+
 }

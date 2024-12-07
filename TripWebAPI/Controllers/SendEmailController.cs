@@ -4,9 +4,9 @@ using TripWebData.Dtos;
 using TripWebData.Inputs;
 using TripWebData;
 using TripWebService;
-using Utils.Utils;
+using TripWebUtils.Utils;
 using DotNetCore.CAP.Dashboard;
-using Utils.Utils.RedisUtil;
+using TripWebUtils.Utils.RedisUtil;
 using Microsoft.EntityFrameworkCore;
 using TripWebData.Dtos.TravelBusiness;
 

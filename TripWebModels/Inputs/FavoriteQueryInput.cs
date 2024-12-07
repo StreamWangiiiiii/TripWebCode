@@ -1,6 +1,4 @@
-﻿using System.Text.Json.Serialization;
-
-namespace Travel.Data.Inputs;
+﻿namespace TripWebData.Inputs;
 
 public class FavoriteQueryInput:PageInput
 {

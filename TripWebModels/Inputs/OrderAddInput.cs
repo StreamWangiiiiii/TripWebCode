@@ -1,6 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
-
-namespace Travel.Data.Inputs;
+﻿namespace TripWebData.Inputs;
 
 /// <summary>
 /// 订单入参

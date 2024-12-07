@@ -1,7 +1,7 @@
 ﻿using System.Security.Cryptography;
 using System.Text;
 
-namespace Utils.Utils;
+namespace TripWebUtils.Utils;
 
 /// <summary>
 /// 加密/解密工具类

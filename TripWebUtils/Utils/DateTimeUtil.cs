@@ -1,4 +1,4 @@
-﻿namespace Utils.Utils;
+﻿namespace TripWebUtils.Utils;
 
 /// <summary>
 /// 时间工具类

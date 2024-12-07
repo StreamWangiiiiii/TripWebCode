@@ -1,4 +1,4 @@
-﻿namespace Travel.Data.Inputs;
+﻿namespace TripWebData.Inputs;
 
 /// <summary>
 /// 旅游产品图片输入参数

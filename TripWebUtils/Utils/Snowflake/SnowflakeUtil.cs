@@ -1,6 +1,6 @@
-﻿using Utils.Utils.RedisUtil;
+﻿using TripWebUtils.Utils.RedisUtil;
 
-namespace Utils.Utils.Snowflake
+namespace TripWebUtils.Utils.Snowflake
 {
     /// <summary>
     /// Snowflake辅助类,利用IP生成Idworker

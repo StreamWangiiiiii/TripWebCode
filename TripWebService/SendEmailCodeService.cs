@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 using TripWebData.Dtos.TravelBusiness;
 using TripWebData;
 using TripWebData.Entity;
-using Utils.Utils;
-using Utils.Utils.RedisUtil;
-using Utils.Utils.Snowflake;
+using TripWebUtils.Utils;
+using TripWebUtils.Utils.RedisUtil;
+using TripWebUtils.Utils.Snowflake;
 using TripWebData.Dtos;
 
 namespace TripWebService

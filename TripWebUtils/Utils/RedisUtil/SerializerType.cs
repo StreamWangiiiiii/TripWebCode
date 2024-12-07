@@ -1,4 +1,4 @@
-﻿namespace Utils.Utils.RedisUtil;
+﻿namespace TripWebUtils.Utils.RedisUtil;
 
 public enum SerializerType
 {

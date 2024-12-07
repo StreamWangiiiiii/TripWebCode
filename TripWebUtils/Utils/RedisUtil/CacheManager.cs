@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 
-namespace Utils.Utils.RedisUtil;
+namespace TripWebUtils.Utils.RedisUtil;
 
 public class CacheManager
 {

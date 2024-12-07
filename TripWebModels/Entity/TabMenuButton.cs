@@ -22,4 +22,6 @@ public partial class TabMenuButton : BaseEntity
     /// 菜单图标地址
     /// </summary>
     public string? IconUrl { get; set; }
+    
+    public TabMenuModule MenuModule { get; set; }
 }

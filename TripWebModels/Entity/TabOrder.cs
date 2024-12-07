@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace TripWebData.Entity;
 
@@ -13,5 +14,9 @@ public partial class TabOrder : BaseEntity
     /// </summary>
     public long? TravelId { get; set; }
 
+    /// <summary>
+    /// 乐观锁
+    /// </summary>
+    [Timestamp]
     public DateTime Version { get; set; }
 }

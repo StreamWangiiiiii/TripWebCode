@@ -1,7 +1,7 @@
 ﻿using System.Text.Json.Serialization;
-using Travel.Data.Enums;
+using TripWebData.Enums;
 
-namespace Travel.Data.Inputs;
+namespace TripWebData.Inputs;
 
 /// <summary>
 /// 旅游查询-输入参数

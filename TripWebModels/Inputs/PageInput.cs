@@ -1,4 +1,4 @@
-﻿namespace Travel.Data.Inputs;
+﻿namespace TripWebData.Inputs;
 
 /// <summary>
 /// 分页对象入参

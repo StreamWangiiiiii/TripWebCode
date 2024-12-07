@@ -2,7 +2,7 @@
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace TripWebAPI.Models
+namespace TripWebUtils.Utils
 {
     /// <summary>
     /// 时间转换器 格式：yyyy-MM-dd HH:mm:ss

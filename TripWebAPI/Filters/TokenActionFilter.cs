@@ -5,7 +5,7 @@ using Microsoft.Extensions.Options;
 using TripWebData.Dtos;
 using TripWebData.Options;
 using TripWebService;
-using Utils.Utils;
+using TripWebUtils.Utils;
 
 namespace TripWebAPI.Filters
 {

@@ -1,12 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.Text.Json.Serialization;
 
-namespace Travel.Data.Inputs;
+namespace TripWebData.Inputs;
 
 /// <summary>
 /// 分类入参
 /// </summary>
-public class CategoryInput:BaseInput
+public class CategoryInput : BaseInput
 {
     /// <summary>
     /// 大于 0-修改，等于 0 添加

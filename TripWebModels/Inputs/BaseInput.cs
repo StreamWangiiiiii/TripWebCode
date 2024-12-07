@@ -1,9 +1,8 @@
-﻿
-using System.Text.Json.Serialization;
-using Microsoft.AspNetCore.Http;
+﻿using System.Text.Json.Serialization;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.Http;
 
-namespace Travel.Data.Inputs;
+namespace TripWebData.Inputs;
 
 /// <summary>
 /// 基类-输入参数
@@ -27,6 +26,5 @@ public abstract class BaseInput
             LoginUserId= Convert.ToInt64(httpContextAccessor.HttpContext.User.Claims.FirstOrDefault(
                 p => p.Type.Equals("UserId"))!.Value);
         }
-        
     }
 }

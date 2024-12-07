@@ -6,8 +6,13 @@ namespace TripWebData.Entity;
 /// <summary>
 /// 订单人员详情表
 /// </summary>
-public partial class TabOrderDetail : BaseEntity
+public partial class TabOrderDetail
 {
+    /// <summary>
+    /// 订单人员详情ID
+    /// </summary>
+    public long Id { get; set; }
+    
     /// <summary>
     /// 旅游项目ID
     /// </summary>

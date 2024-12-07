@@ -1,4 +1,4 @@
-﻿namespace TripWebAPI.Filters
+﻿namespace TripWebData.Consts
 {
     /// <summary>
     /// 授权策略角色名称

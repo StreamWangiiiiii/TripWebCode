@@ -1,6 +1,6 @@
 ﻿using System.Net.Mail;
 
-namespace Utils.Utils;
+namespace TripWebUtils.Utils;
 
 /// <summary>
 /// 邮件发送工具类

@@ -11,7 +11,7 @@ namespace TripWebAPI.Controllers
     /// </summary>
     [ApiController]
     [Route("[controller]/[action]")]
-    [AuthorizeAttribute]
+    [TripWebAuthorize]
     public class UploadController : BaseController
     {
         private readonly IWebHostEnvironment _hostEnvironment;

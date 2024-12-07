@@ -1,6 +1,6 @@
 ﻿using ProtoBuf;
 
-namespace Utils.Utils;
+namespace TripWebUtils.Utils;
 
 /// <summary>
 ///  序列化工具类

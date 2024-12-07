@@ -5,7 +5,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using Microsoft.VisualBasic;
 
-namespace Utils.Utils;
+namespace TripWebUtils.Utils;
 
 #region "文件信息结构"
 

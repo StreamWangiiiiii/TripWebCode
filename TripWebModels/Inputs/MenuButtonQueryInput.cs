@@ -1,4 +1,4 @@
-﻿namespace Travel.Data.Inputs;
+﻿namespace TripWebData.Inputs;
 
 /// <summary>
 /// 菜单按钮查询-输入参数

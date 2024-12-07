@@ -1,4 +1,4 @@
-﻿namespace Travel.Data.Inputs;
+﻿namespace TripWebData.Inputs;
 
 /// <summary>
 /// 角色权限分配-输入参数

@@ -1,6 +1,6 @@
 using System.Net.NetworkInformation;
 
-namespace Utils.Utils.Snowflake
+namespace TripWebUtils.Utils.Snowflake
 {
     public class IdWorker
     {
